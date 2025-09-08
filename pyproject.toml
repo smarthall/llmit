@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "llmit"
+version = "0.1.0"
+description = "llmit uses an LLM to produce human optimised descriptions of changes in a git repo."
+authors = ["Daniel Hall <danhall@redhat.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.13"
+haystack-ai = "^2.17.1"
+cyclopts = "^3.23.1"
+dotenv = "^0.9.9"
+gitpython = "^3.1.45"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+llmit = "llmit.cli:app"
