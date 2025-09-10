@@ -45,6 +45,7 @@ def run(
         },
     )
 
+    print("\n\n")
     print(results["router"]["final_replies"][0].text)
 
 
