@@ -13,7 +13,6 @@ from .tools import GitTools
 
 app = App()
 
-
 @app.default
 def run(
     repo: str,
@@ -21,23 +20,10 @@ def run(
     tone: str = "Professional",
     language: str = "English",
     emoji: bool = True,
+    debug: bool = False,
 ):
-    logging.basicConfig(
-        format="%(levelname)s - %(name)s -  %(message)s", level=logging.WARNING
-    )
-    logging.getLogger("haystack").setLevel(logging.DEBUG)
-
-    tracing.tracer.is_content_tracing_enabled = (
-        True  # to enable tracing/logging content (inputs/outputs)
-    )
-    tracing.enable_tracing(
-        LoggingTracer(
-            tags_color_strings={
-                "haystack.component.input": "\x1b[1;31m",
-                "haystack.component.name": "\x1b[1;34m",
-            }
-        )
-    )
+    if debug:
+        setup_debug_logging()
 
     print(f"Running llmit for {repo}")
 
@@ -60,3 +46,22 @@ def run(
     )
 
     print(results["router"]["final_replies"][0].text)
+
+
+def setup_debug_logging():
+    logging.basicConfig(
+        format="%(levelname)s - %(name)s -  %(message)s", level=logging.WARNING
+    )
+    logging.getLogger("haystack").setLevel(logging.DEBUG)
+
+    tracing.tracer.is_content_tracing_enabled = (
+        True  # to enable tracing/logging content (inputs/outputs)
+    )
+    tracing.enable_tracing(
+        LoggingTracer(
+            tags_color_strings={
+                "haystack.component.input": "\x1b[1;31m",
+                "haystack.component.name": "\x1b[1;34m",
+            }
+        )
+    )

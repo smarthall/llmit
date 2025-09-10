@@ -22,7 +22,6 @@ class GitTools:
         """
         Use this tool to get the commit message for a given commit hash.
         """
-        print(f"####### Getting commit message for {commit_hash}")
         return self._repo.commit(commit_hash).message
 
     def get_commit_author(
@@ -37,7 +36,7 @@ class GitTools:
     def get_revision_log_summary(
         self,
         revision: Annotated[
-            str, "The giut revision to get the log summary for"
+            str, "The git revision to get the log summary for"
         ],
     ) -> str:
         """
